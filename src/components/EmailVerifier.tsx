@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, Label, Textarea, Progress } from 'flowbite-react';
-import { CheckCircle2, XCircle, Mail, AlertCircle } from 'lucide-react';
+import { CheckCircle2, XCircle, Mail, AlertCircle, User, Users, ClipboardPaste } from 'lucide-react';
 
 interface EmailResult {
   email: string;
@@ -48,34 +48,74 @@ export default function EmailVerifier() {
   const invalidCount = results.length - validCount;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <Card className="bg-white/50 backdrop-blur-sm border-0 shadow-lg">
-        <div className="space-y-6">
+    <div className="max-w-4xl mx-auto p-6 space-y-6  ">
+      <Card className="bg-white/50 backdrop-blur-sm border-0 shadow-lg  bg-primary-200">
+      <center>
+        <div className="space-y-6 items-center">
           <div className="flex items-center space-x-2">
             <Mail className="w-6 h-6 text-blue-600" />
             <h2 className="text-2xl font-bold text-gray-900">Bulk Email Verifier</h2>
-          </div>
-          
-          <div>
-            <div className="mb-2 block">
+          </div >
+          <p className="text-lg text-gray-700">
+            Verify multiple emails at once. Enter emails (one per line) and click the Verify Emails button.</p>
+          <div className="grid grid-cols-2 gap-4">
+            {/* email input */}
+          <div className=''>
+            <div className="mb-2 ">
               <Label htmlFor="emails" value="Enter emails (one per line)" />
             </div>
             <Textarea
               id="emails"
-              rows={8}
-              className="font-mono"
+              rows={12}
+              className="bg-primary-50 w-72 px-5"
               placeholder="john@example.com&#10;jane@example.com&#10;..."
               value={emails}
               onChange={(e) => setEmails(e.target.value)}
             />
+          <div className="flex mx-4 align-baseline">
+           <div className="mails flex items-center hover:divide-orange-600"> 
+           <Users className='w-6' />
+            <span className='px-2 '>:</span> <span className="text-gray-700">{(emails)?(emails.length-1):''}</span>
+            </div>
+            <div className="clipboard_paste align-baseline py-2  hover:divide-orange-600">
+            <ClipboardPaste size={20}  className='w-6  hover:divide-orange-600 transition  ' />
+            </div>
+            </div>
           </div>
-
+          {/* end of email input */}
+      {/* -------------------------------------------------------------------------------------------- */}
+          {/* valid email address input */}
+          <div >
+            <div className="mb-2">
+              <Label htmlFor="emails" value="Verified Email" />
+            </div>
+            <Textarea
+              id="emails"
+              rows={12}
+              className="bg-primary-50 w-72 px-5"
+              placeholder="john@example.com&#10;jane@example.com&#10;..."
+              value={emails}
+              onChange={(e) => setEmails(e.target.value)}
+            />
+             <div className="flex mx-4 align-baseline">
+           <div className="mails flex items-center hover:divide-orange-600"> 
+           <Users className='w-6' />
+            <span className='px-2 '>:</span> <span className="text-gray-700">{(emails)?(emails.length-1):''}</span>
+            </div>
+            <div className="clipboard_paste align-baseline py-2  hover:divide-orange-600">
+            <ClipboardPaste size={20}  className='w-6  hover:divide-orange-600 transition  ' />
+            </div>
+            </div>
+          </div>
+          {/* end of valid email address input */}  
+      </div>
+          <div>
           <Button
             gradientDuoTone="purpleToBlue"
-            size="lg"
+            size="sm"
             onClick={handleVerification}
             disabled={isVerifying || !emails.trim()}
-            className="w-full"
+            className="w-[100px] "
           >
             {isVerifying ? 'Verifying...' : 'Verify Emails'}
           </Button>
@@ -130,7 +170,15 @@ export default function EmailVerifier() {
             </div>
           )}
         </div>
-      </Card>
+  
+   
+</div>
+</center>
+</Card>
     </div>
+   
+    
+
   );
+
 }
