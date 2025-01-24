@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, Label, Textarea, Progress } from 'flowbite-react';
-import { CheckCircle2, XCircle, Mail, AlertCircle, User, Users, ClipboardPaste } from 'lucide-react';
+import { CheckCircle2, XCircle, Mail, AlertCircle, User, Users, ClipboardPaste, ClipboardCopy } from 'lucide-react';
 
 interface EmailResult {
   email: string;
@@ -43,6 +43,13 @@ export default function EmailVerifier() {
     setResults(results);
     setIsVerifying(false);
   };
+
+  // results.map((valid, index) => ({
+  //   key: index,
+  //   email: valid.email,
+  //   isValid: valid.isValid,
+  //   reason: valid.reason
+  // }), []);	
 
   const validCount = results.filter(r => r.isValid).length;
   const invalidCount = results.length - validCount;
@@ -103,7 +110,7 @@ export default function EmailVerifier() {
             <span className='px-2 '>:</span> <span className="text-gray-700">{(emails)?(emails.length-1):''}</span>
             </div>
             <div className="clipboard_paste align-baseline py-2  hover:divide-orange-600">
-            <ClipboardPaste size={20}  className='w-6  hover:divide-orange-600 transition  ' />
+            <ClipboardCopy size={20}  className='w-6 hover:ring-orange-500 ' />
             </div>
             </div>
           </div>
@@ -111,11 +118,11 @@ export default function EmailVerifier() {
       </div>
           <div>
           <Button
-            gradientDuoTone="purpleToBlue"
+            // gradientDuoTone="purpleToBlue"
             size="sm"
             onClick={handleVerification}
             disabled={isVerifying || !emails.trim()}
-            className="w-[100px] "
+            className="w-[100px] bg-blue-500 hover:bg-blue-600 py-1" 
           >
             {isVerifying ? 'Verifying...' : 'Verify Emails'}
           </Button>
@@ -124,9 +131,10 @@ export default function EmailVerifier() {
             <Progress
               progress={progress}
               size="lg"
-              color="blue"
+              // color="blue"
               labelProgress
               labelText
+              className=''
             />
           )}
 
@@ -147,7 +155,7 @@ export default function EmailVerifier() {
                 </Card>
               </div>
 
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 {results.map((result, index) => (
                   <div
                     key={index}
@@ -166,7 +174,7 @@ export default function EmailVerifier() {
                     )}
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
           )}
         </div>
